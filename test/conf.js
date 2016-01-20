@@ -1,14 +1,21 @@
 // Tests for the calculator.
 exports.config = {
-  directConnect: true,
+  framework: 'jasmine',
+   seleniumAddress: 'http://localhost:4444/wd/hub',
+   suites: {
 
-  framework: 'jasmine2',
-
-  specs: [
-    'spec.js'
-  ],
-
-  capabilities: {
-    'browserName': 'chrome'
-  },
+   homepage: './e2e/specs/spec.js'
+ },
+ onPrepare: function() {
+   global.isAngularSite = function(flag) {
+      browser.ignoreSynchronization = !flag;
+   };
+},
+   multiCapabilities: [
+  // {
+  //    browserName: 'firefox'
+  //  },
+   {
+     browserName: 'chrome'
+   }]
 };
